@@ -15,6 +15,8 @@ class Solution(object):
             cur = next
         
         return pre
+    
+    
 
 def bulid_linked_list(values):
     head = ListNode(values[0])
