@@ -4,9 +4,7 @@ public class WordCountMapper extends Mapper<LongWriteable, Text, Text, IntWritea
 
    @Override
    protected void map(LongWriteable key, Text value, Context context) throws IOException, InterruptedException {
-     String line = value.toString();
-     String[] words = line.split(" ");
-
+     String[] words = value.toString().split(" ");
      for(String word : words) {
         k.set(word);
         context.write(k,v);
