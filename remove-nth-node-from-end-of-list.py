@@ -30,7 +30,7 @@ class Solution(object):
     if fast is None:
         return dummy.next.next
     
-    while fast and fast.next is not None:
+    while fast:
         slow = slow.next
         fast = fast.next
     
