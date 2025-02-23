@@ -1,10 +1,10 @@
-public class WordCountMapper extends Mapper<LongWriteable, Text, Text, IntWriteable> {
+public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
    Text k = new Text();
-   IntWriteable v = new IntWriteable(1);
+   IntWritable v = new IntWritable(1);
 
    @Override
-   protected void map(LongWriteable key, Text value, Context context) throws IOException, InterruptedException {
-     String[] words = value.toString().split(" ");
+   protected void map(LongWritable key, Text values, Context context) throws IOException, InterruptedException {
+     String[] words = values.toString().split(" ");
      for(String word : words) {
         k.set(word);
         context.write(k,v);
@@ -12,14 +12,14 @@ public class WordCountMapper extends Mapper<LongWriteable, Text, Text, IntWritea
    }
 }
 
-public class WordCountReducer extends Reducer<LongWriteable, Text, Text, IntWriteable> {
+public class WordCountReducer extends Reducer<LongWritable, Text, Text, IntWritable> {
     in sum;
-    IntWriteable v = new IntWriteable();
+    IntWritable v = new IntWritable();
 
     @Override
-    protected void reducer(LongWriteable key, Iterable<IntWriteable> values, Context context) throws IOException, InterruptedException {
+    protected void reducer(LongWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
       sum = 0;
-      for(IntWriteable count : values){
+      for(IntWritable count : values){
         sum += count.get();
       }
       v.set(sum);
